@@ -1,18 +1,6 @@
 import random
 import string
-
-print("Welcome to Password Generator")
-
-yes_input = ["y", "Y", "yes", "YES"]
-
-length = int(input("Enter minimum password length: "))
-include_numbers = input("Enter y if you want digits in your password: ") in yes_input
-include_cap = (
-    input("Enter y if you want a capital letter in your password: ") in yes_input
-)
-include_special = (
-    input("Enter y if you want special characters in your password: ") in yes_input
-)
+from xkcdpass import xkcd_password as xp
 
 
 def generatePass(min_length, special_chars=True, number_chars=True, cap_chars=True):
@@ -57,4 +45,57 @@ def generatePass(min_length, special_chars=True, number_chars=True, cap_chars=Tr
     print("Your Password is: ", pwd)
 
 
-generatePass(length, include_special, include_numbers, include_cap)
+print("Welcome to Password Generator")
+print("[1] Get XKCD style password \n[2] Get normal password")
+choice = int(input("Enter choice: "))
+
+
+if choice == 1:
+    word_len_start = input(
+        "Range of Number of letters in each word of password phrase (default range= 5 to 9) \nfrom: "
+    )
+
+    word_len_end = input("to: ")
+    num_words = input("Number of words in the password phrase (default = 6): ")
+    print("Enter any special symbols you want to add and press d when done")
+    delimiters = []
+    sp_char = input()
+    if sp_char != "d":
+        while sp_char != "d":
+            delimiters.append(sp_char)
+            sp_char = input()
+
+    print(delimiters)
+
+    yes_input = ["y", "Y", "yes", "YES"]
+
+    include_numbers = (
+        input("Enter y if you want digits in your password: ") in yes_input
+    )
+    include_cap = (
+        input("Enter y if you want a capital letter in your password: ") in yes_input
+    )
+    include_special = (
+        input("Enter y if you want special characters in your password: ") in yes_input
+    )
+
+    wordfile = xp.locate_wordfile()
+    mywords = xp.generate_wordlist(
+        wordfile=wordfile, min_length=int(word_len_start), max_length=int(word_len_end)
+    )
+
+
+elif choice == 2:
+    yes_input = ["y", "Y", "yes", "YES"]
+
+    length = int(input("Enter minimum length of password required: "))
+    include_numbers = (
+        input("Enter y if you want digits in your password: ") in yes_input
+    )
+    include_cap = (
+        input("Enter y if you want a capital letter in your password: ") in yes_input
+    )
+    include_special = (
+        input("Enter y if you want special characters in your password: ") in yes_input
+    )
+    generatePass(length, include_special, include_numbers, include_cap)
