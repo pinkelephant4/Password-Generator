@@ -45,18 +45,34 @@ def generatePass(min_length, special_chars=True, number_chars=True, cap_chars=Tr
     print("Your Password is: ", pwd)
 
 
+def generateXkcdPass(
+    delimiters,
+    include_numbers,
+    include_special,
+    include_cap,
+    num_words=6,
+    word_len_start=5,
+    word_len_end=9,
+):
+    wordfile = xp.locate_wordfile()
+    mywords = xp.generate_wordlist(
+        wordfile=wordfile, min_length=word_len_start, max_length=word_len_end
+    )
+    
+
+
 print("Welcome to Password Generator")
 print("[1] Get XKCD style password \n[2] Get normal password")
 choice = int(input("Enter choice: "))
 
 
 if choice == 1:
-    word_len_start = input(
-        "Range of Number of letters in each word of password phrase (default range= 5 to 9) \nfrom: "
+    word_len_start = int(
+        input("Range of Number of letters in each word of password phrase \nfrom: ")
     )
 
-    word_len_end = input("to: ")
-    num_words = input("Number of words in the password phrase (default = 6): ")
+    word_len_end = int(input("to: "))
+    num_words = int(input("Number of words in the password phrase: "))
     print("Enter any special symbols you want to add and press d when done")
     delimiters = []
     sp_char = input()
@@ -65,7 +81,7 @@ if choice == 1:
             delimiters.append(sp_char)
             sp_char = input()
 
-    print(delimiters)
+    # print(delimiters)
 
     yes_input = ["y", "Y", "yes", "YES"]
 
@@ -79,9 +95,14 @@ if choice == 1:
         input("Enter y if you want special characters in your password: ") in yes_input
     )
 
-    wordfile = xp.locate_wordfile()
-    mywords = xp.generate_wordlist(
-        wordfile=wordfile, min_length=int(word_len_start), max_length=int(word_len_end)
+    generateXkcdPass(
+        delimiters,
+        include_numbers,
+        include_special,
+        include_cap,
+        num_words,
+        word_len_start,
+        word_len_end,
     )
 
 
