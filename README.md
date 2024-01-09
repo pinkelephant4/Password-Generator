@@ -9,6 +9,13 @@ This simple Python script is a password generator that allows users to create st
 - **Include Digits:** Users can choose whether to include digits in the generated password.
 - **Include Special Characters:** Users can choose whether to include special characters in the generated password.
 
+## Getting Started
+
+1. Clone the repository or download the script `passwordGenerator.py`.
+2. Open a terminal or command prompt and navigate to the directory containing `passwordGenerator.py`.
+3. Run the script using the command: `python passwordGenerator.py`.
+
+
 ## Usage
 
 1. Enter the desired password length when prompted.
@@ -17,11 +24,6 @@ This simple Python script is a password generator that allows users to create st
 4. The script will generate and display a password based on the provided criteria.
 
 
-## Getting Started
-
-1. Clone the repository or download the script `passwordGenerator.py`.
-2. Open a terminal or command prompt and navigate to the directory containing `passwordGenerator.py`.
-3. Run the script using the command: `python passwordGenerator.py`.
 
 
 ## Example
