@@ -60,7 +60,7 @@ def generateXkcdPass(
     )
 
     if acronym != "":
-        word_v1 = xp.generate_xkcdpassword(wordlist=mywords, acrostic=True)
+        word_v1 = xp.generate_xkcdpassword(wordlist=mywords, acrostic=acronym)
     else:
         word_v1 = xp.generate_xkcdpassword(wordlist=mywords, numwords=num_words)
     joined_str = word_v1.replace(" ", "")
@@ -103,48 +103,85 @@ def generateXkcdPass(
 print("Welcome to Password Generator")
 print("[1] Get XKCD style password \n[2] Get normal password")
 
-choice = int(input("Enter choice: "))
-while choice not in [1, 2]:
-    print("Pls enter valid choice")
+choice = input("Enter choice: ")
+while not choice.isdigit() or int(choice) not in [1, 2]:
+    print("\n\nPls enter valid choice ")
     print("[1] Get XKCD style password \n[2] Get normal password")
-    choice = int(input("Enter choice: "))
-
+    choice = input("Enter choice: ")
+choice = int(choice)
 
 yes_input = ["y", "Y", "yes", "YES"]
 
 
 if choice == 1:
-    word_len_start = int(
-        input("Range of Number of letters in each word of password phrase \nfrom: ")
+    # try:
+    #     word_len_start = int(
+    #         input("Range of Number of letters in each word of password phrase \nfrom: ")
+    #     )
+    # except ValueError:
+    #     print("Pls enter a valid start of range: ")
+    #     word_len_start = int(
+    #         input("Range of Number of letters in each word of password phrase \nfrom: ")
+    #     )
+
+    word_len_start = input(
+        "Range of Number of letters in each word of password phrase \nfrom: "
     )
+    while word_len_start == "0" or not word_len_start.isdigit():
+        print("Pls enter a valid start of range: ")
+        word_len_start = input(
+            "Range of Number of letters in each word of password phrase \nfrom: "
+        )
 
-    word_len_end = int(input("to: "))
-    while word_len_end <= word_len_start:
+    word_len_start = int(word_len_start)
+
+    word_len_end = input("to: ")
+    while not word_len_end.isdigit() or int(word_len_end) <= int(word_len_start):
         print("Pls enter valid value")
-        word_len_end = int(input("to: "))
+        word_len_end = input("to: ")
 
-    num_words = int(input("Number of words in the password phrase: "))
+    word_len_end = int(word_len_end)
+
+    num_words = input("Number of words in the password phrase: ")
+    while not num_words.isdigit():
+        print("Pls enter a valid value for number of words.")
+        num_words = input("Number of words in the password phrase: ")
+
+    num_words = int(num_words)
 
     include_special = (
         input("Enter y if you want special characters in your password: ") in yes_input
     )
 
     if include_special:
+        special_characters = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
+        spl = []
         print("Enter special symbols you want to add and press d when done")
         delimiters = []
         sp_char = input()
+        if sp_char not in special_characters:
+            while sp_char not in special_characters and sp_char != "d":
+                print("Pls enter a valid special character.")
+                sp_char = input()
         if sp_char != "d":
             while sp_char != "d":
                 delimiters.append(sp_char)
                 sp_char = input()
-
+                if sp_char not in special_characters and sp_char != "d":
+                    while sp_char not in special_characters:
+                        print("Pls enter a valid special character.")
+                        sp_char = input()
+        else:
+            delimiters = [" "]
         # print(delimiters)
+
     else:
         delimiters = [" "]
 
     include_numbers = (
         input("Enter y if you want digits in your password: ") in yes_input
     )
+
     include_cap = (
         input("Enter y if you want a capital letter in your password: ") in yes_input
     )
@@ -159,7 +196,7 @@ if choice == 1:
             acronym = input("Enter acronym for the passphrase (1 word): ").lower()
     else:
         acronym = ""
-    
+
     generateXkcdPass(
         delimiters,
         include_numbers,
