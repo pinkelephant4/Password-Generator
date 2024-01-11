@@ -49,6 +49,7 @@ def generateXkcdPass(
     delimiters,
     include_numbers,
     include_cap,
+    acronym,
     num_words=6,
     word_len_start=5,
     word_len_end=9,
@@ -58,7 +59,10 @@ def generateXkcdPass(
         wordfile=wordfile, min_length=word_len_start, max_length=word_len_end
     )
 
-    word_v1 = xp.generate_xkcdpassword(mywords, num_words)
+    if acronym != "":
+        word_v1 = xp.generate_xkcdpassword(wordlist=mywords, acrostic=True)
+    else:
+        word_v1 = xp.generate_xkcdpassword(wordlist=mywords, numwords=num_words)
     joined_str = word_v1.replace(" ", "")
     word_v1 = str.split(word_v1)
 
@@ -79,9 +83,7 @@ def generateXkcdPass(
             i = random.randrange(len(word_v1))
             j = random.randrange(len(word_v1[i]))
             chosen_word = word_v1[i]
-            chosen_word = (
-                chosen_word[:j] + str(random.randint(0,9)) + chosen_word[j:]
-            )
+            chosen_word = chosen_word[:j] + str(random.randint(0, 9)) + chosen_word[j:]
             word_v1[i] = chosen_word
 
     new_password = ""
@@ -102,6 +104,12 @@ print("Welcome to Password Generator")
 print("[1] Get XKCD style password \n[2] Get normal password")
 
 choice = int(input("Enter choice: "))
+while choice not in [1, 2]:
+    print("Pls enter valid choice")
+    print("[1] Get XKCD style password \n[2] Get normal password")
+    choice = int(input("Enter choice: "))
+
+
 yes_input = ["y", "Y", "yes", "YES"]
 
 
@@ -109,9 +117,9 @@ if choice == 1:
     word_len_start = int(
         input("Range of Number of letters in each word of password phrase \nfrom: ")
     )
-    
+
     word_len_end = int(input("to: "))
-    while  word_len_end <= word_len_start:
+    while word_len_end <= word_len_start:
         print("Pls enter valid value")
         word_len_end = int(input("to: "))
 
@@ -141,12 +149,22 @@ if choice == 1:
         input("Enter y if you want a capital letter in your password: ") in yes_input
     )
 
-    # acronym = input("Enter y if you want an acronym for your password: ") in yes_input
-
+    include_acronym = (
+        input("Enter y if you want an acronym for your password: ") in yes_input
+    )
+    if include_acronym:
+        acronym = input("Enter acronym for the passphrase (1 word): ").lower()
+        while len(str.split(acronym)) != 1:
+            print("Enter valid acronym.")
+            acronym = input("Enter acronym for the passphrase (1 word): ").lower()
+    else:
+        acronym = ""
+    
     generateXkcdPass(
         delimiters,
         include_numbers,
         include_cap,
+        acronym,
         num_words,
         word_len_start,
         word_len_end,
