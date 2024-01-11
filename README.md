@@ -2,7 +2,11 @@
 
 ## Overview
 
-This Python script provides a flexible password generator with two main functionalities: generating XKCD-style passwords and traditional passwords. Users can choose the type of password, customize its length, and include various elements such as digits, special characters, and capital letters.
+This Python script provides a flexible password generator with two main functionalities: <br>
+[1] generating XKCD-style passwords inspired from [this](https://xkcd.com/936/) comic and <br>
+[2] traditional passwords. <br>
+Users can choose the type of password, customize its length, and include various elements such as digits, special characters, and capital letters.
+
 
 ## Features
 
@@ -24,9 +28,13 @@ This Python script provides a flexible password generator with two main function
 
 ## Getting Started
 
-1. Clone the repository or download the script `password_generator.py`.
-2. Open a terminal or command prompt and navigate to the directory containing `password_generator.py`.
-3. Run the script using the command: `python password_generator.py`.
+1. Clone the repository or download the script `passwordGenerator.py`.
+2. Open a terminal or command prompt and navigate to the directory containing `passwordGenerator.py`.
+3. Run the script using the command:
+   
+   ```bash
+    python passwordGenerator.py
+    ```
 
 ## Usage
 
@@ -49,6 +57,3 @@ This Python script provides a flexible password generator with two main function
 
 If you have any suggestions or improvements, feel free to open an issue or create a pull request.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
