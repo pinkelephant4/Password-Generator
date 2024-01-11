@@ -102,12 +102,12 @@ def generateXkcdPass(
 
 
 print("Welcome to Password Generator")
-print("[1] Get XKCD style password \n[2] Get normal password")
+print("[1] Get XKCD style passphrase type password \n[2] Get traditional password")
 
 choice = input("Enter choice: ")
 while not choice.isdigit() or int(choice) not in [1, 2]:
-    print("\n\nPls enter valid choice ")
-    print("[1] Get XKCD style password \n[2] Get normal password")
+    print("\n\nPls enter valid choice.\n")
+    print("[1] Get XKCD style passphrase type password \n[2] Get traditional password")
     choice = input("Enter choice: ")
 choice = int(choice)
 
@@ -129,7 +129,7 @@ if choice == 1:
         "Range of Number of letters in each word of password phrase \nfrom: "
     )
     while word_len_start == "0" or not word_len_start.isdigit():
-        print("Pls enter a valid start of range: ")
+        print("Pls enter a valid start of range.\n ")
         word_len_start = input(
             "Range of Number of letters in each word of password phrase \nfrom: "
         )
@@ -138,20 +138,21 @@ if choice == 1:
 
     word_len_end = input("to: ")
     while not word_len_end.isdigit() or int(word_len_end) <= int(word_len_start):
-        print("Pls enter valid value")
+        print("Pls enter valid value.")
         word_len_end = input("to: ")
 
     word_len_end = int(word_len_end)
 
     num_words = input("Number of words in the password phrase: ")
     while not num_words.isdigit():
-        print("Pls enter a valid value for number of words.")
+        print("Pls enter a valid value for number of words.\n")
         num_words = input("Number of words in the password phrase: ")
 
     num_words = int(num_words)
 
     include_special = (
-        input("Enter y if you want special characters in your password: ") in yes_input
+        input("Enter y if you want special characters in your passphrase: ")
+        in yes_input
     )
 
     if include_special:
@@ -180,15 +181,15 @@ if choice == 1:
         delimiters = [" "]
 
     include_numbers = (
-        input("Enter y if you want digits in your password: ") in yes_input
+        input("Enter y if you want digits in your passphrase: ") in yes_input
     )
 
     include_cap = (
-        input("Enter y if you want a capital letter in your password: ") in yes_input
+        input("Enter y if you want a capital letter in your passphrase: ") in yes_input
     )
 
     include_acronym = (
-        input("Enter y if you want an acronym for your password: ") in yes_input
+        input("Enter y if you want an acronym for your passphrase: ") in yes_input
     )
     if include_acronym:
         acronym = input("Enter acronym for the passphrase (1 word): ").lower()
