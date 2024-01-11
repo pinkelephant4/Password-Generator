@@ -97,6 +97,7 @@ def generateXkcdPass(
 
         new_password = new_password + joining_words
 
+    new_password = new_password.strip()
     print(new_password)
 
 
